@@ -13,12 +13,30 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        debug {
+            storeFile file('/signed/_dev_key')
+            storePassword 'k4hvdq9tj9'
+            keyAlias 'key0'
+            keyPassword 'k4hvdq9tj9'
+        }
+        release {
+            storeFile file('/signed/_dev_key')
+            storePassword 'k4hvdq9tj9'
+            keyAlias 'key0'
+            keyPassword 'k4hvdq9tj9'
+        }
+    }
+
     buildTypes {
-        debug{
+        debug {
+            signingConfig signingConfigs.debug
             buildConfigField "String", "API_ENDPOINT",
                     "\"http://www.kiparo.ru/t/fake-api/car-service.php\""
         }
         release {
+            signingConfig signingConfigs.release
             buildConfigField "String", "API_ENDPOINT",
                     "\"http://www.kiparo.ru/t/fake-api/car-service.php\""
             minifyEnabled false
@@ -45,8 +63,9 @@ dependencies {
     implementation rootProject.recyclerViev
 
     implementation rootProject.lifecycle
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
     kapt rootProject.lifecycle_anot_proc
-
 
     //Tests
     testImplementation rootProject.junit
