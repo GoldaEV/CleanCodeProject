@@ -7,8 +7,8 @@ import io.reactivex.Scheduler
 import io.reactivex.Single
 
 class GetVehicleUseCaseDefault(
-    private val workSchedulers: Scheduler,
-    private val postSchedulers: Scheduler,
+    private val workScheduler: Scheduler,
+    private val postScheduler: Scheduler,
     private val vehicleRepository: VehicleRepository
 ) : GetVehicleUseCase {
 
@@ -20,7 +20,7 @@ class GetVehicleUseCaseDefault(
 
         return vehicleRepository
             .fetch(coordinateParam)
-            .subscribeOn(workSchedulers)
-            .observeOn(postSchedulers)
+            .subscribeOn(workScheduler)
+            .observeOn(postScheduler)
     }
 }

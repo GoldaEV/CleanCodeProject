@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -38,6 +39,14 @@ dependencies {
 
     //Rx
     implementation rootProject.rxjava2Android
+
+    implementation rootProject.supportV4
+    implementation rootProject.suportdesign
+    implementation rootProject.recyclerViev
+
+    implementation rootProject.lifecycle
+    kapt rootProject.lifecycle_anot_proc
+
 
     //Tests
     testImplementation rootProject.junit

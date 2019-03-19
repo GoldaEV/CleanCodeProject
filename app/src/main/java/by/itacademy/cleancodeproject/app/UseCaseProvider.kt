@@ -11,8 +11,8 @@ object UseCaseProvider {
 
     fun provideGetVehicleUseCase() : GetVehicleUseCase {
         return GetVehicleUseCaseDefault(
-            workSchedulers = getWorkScheduler(),
-            postSchedulers = getUiScheduler(),
+            workScheduler = getWorkScheduler(),
+            postScheduler = getUiScheduler(),
             vehicleRepository = VehicleRepositoryRemote(BuildConfig.API_ENDPOINT)
         )
     }
