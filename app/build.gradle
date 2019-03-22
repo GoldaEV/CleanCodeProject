@@ -16,16 +16,16 @@ android {
 
     signingConfigs {
         debug {
-            storeFile file('../signed/_dev_key')
-            storePassword 'k4hvdq9tj9'
+            storeFile file('../signed/_dev_key.jks')
+            storePassword '123456'
             keyAlias 'key0'
-            keyPassword 'k4hvdq9tj9'
+            keyPassword '123456'
         }
         release {
-            storeFile file('/signed/_dev_key')
-            storePassword 'k4hvdq9tj9'
+            storeFile file('../signed/_dev_key.jks')
+            storePassword '123456'
             keyAlias 'key0'
-            keyPassword 'k4hvdq9tj9'
+            keyPassword '123456'
         }
     }
 
