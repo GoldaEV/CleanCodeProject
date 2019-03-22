@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          package="by.itacademy.cleancodeproject">
+          package="com.golda.cleancodeproject">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -20,7 +20,7 @@
                 android:value="@string/google_maps_key"/>
 
         <activity
-                android:name=".presentation.screen.vehicle.VehicleMapsActivity"
+                android:name="com.golda.cleancodeproject.presentation.screen.vehicle.VehicleMapsActivity"
                 android:label="@string/title_activity_vehicle_maps">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -28,7 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.test.mvvm.TestMvvmActivity">
+        <activity android:name="com.golda.cleancodeproject.presentation.test.mvvm.TestMvvmActivity">
 
         </activity>
     </application>
