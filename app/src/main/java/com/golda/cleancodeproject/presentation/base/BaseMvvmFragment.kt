@@ -9,21 +9,26 @@ import android.view.ViewGroup
 
 abstract class BaseMvvmFragment<VM: BaseViewModel> : Fragment() {
 
-    protected lateinit var viewModel : VM
+    protected lateinit var viewModel: VM
 
     @LayoutRes
-    protected abstract fun provideLayoutId() : Int
+    protected abstract fun provideLayoutId(): Int
 
-    protected abstract fun provideVievModel() : VM
+    protected abstract fun provideViewModel() : VM
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    /**
+     * Будет вызвана только после инифиализации viewModel
+     */
+    protected abstract fun initView()
 
-        viewModel = provideVievModel()
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        return inflater.inflate(provideLayoutId(), container, false)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(provideLayoutId(), container, false)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = provideViewModel()
+        initView()
     }
 }

@@ -33,7 +33,7 @@
                 android:value="@string/google_maps_key"/>
 
         <activity
-                android:name=".presentation.screen.vehicle.VehicleMapsActivity"
+                android:name=".presentation.screen.vehicle.map.VehicleMapActivity"
                 android:label="@string/title_activity_vehicle_maps">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
