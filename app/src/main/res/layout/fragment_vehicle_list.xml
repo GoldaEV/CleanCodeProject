@@ -9,8 +9,10 @@
             android:id="@+id/bottomSheetLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorAccent"
-            app:layout_behavior="@string/bottom_sheet_behavior">
+            android:background="@drawable/list_background"
+            app:layout_behavior="@string/bottom_sheet_behavior"
+            android:padding="8dp"
+            android:layout_marginHorizontal="16dp">
 
         <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycleViewVehicle"

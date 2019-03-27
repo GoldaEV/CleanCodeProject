@@ -2,12 +2,15 @@ package com.golda.cleancodeproject.presentation.screen.vehicle.list
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.Toast
 import com.golda.cleancodeproject.R
+import com.golda.cleancodeproject.domain.entity.vehicle.Vehicle
 import com.golda.cleancodeproject.presentation.base.BaseMvvmFragment
 import com.golda.cleancodeproject.presentation.screen.vehicle.list.adapter.VehicleListAdapter
 import io.reactivex.disposables.Disposable
@@ -18,6 +21,7 @@ class VehicleListFragment : BaseMvvmFragment<VehicleListViewModel>() {
     companion object {
         fun getInstance() = VehicleListFragment()
     }
+    private lateinit var onVehicleClicked : OnVehicleClicked
 
     private var vehicleStateDisposable: Disposable? = null
 
@@ -72,8 +76,12 @@ class VehicleListFragment : BaseMvvmFragment<VehicleListViewModel>() {
                 val list = state.vehicleList
                 Toast.makeText(context, state.vehicleList.size.toString(), Toast.LENGTH_SHORT).show()
                 // закидываем в adapter
-                recycleViewVehicle.layoutManager = LinearLayoutManager(context)
-                recycleViewVehicle.adapter = VehicleListAdapter(this, list)
+                val layoutManager = LinearLayoutManager(context)
+                recycleViewVehicle.layoutManager = layoutManager
+                val decorator = DividerItemDecoration(context, layoutManager.orientation)
+                recycleViewVehicle.addItemDecoration(decorator)
+                recycleViewVehicle.adapter = VehicleListAdapter(list, {vehicleItem : Vehicle -> vehicleItemClicked(vehicleItem)})
+                recycleViewVehicle.hasFixedSize()
 
             }
             is VehicleState.Error -> {
@@ -86,8 +94,25 @@ class VehicleListFragment : BaseMvvmFragment<VehicleListViewModel>() {
         }
     }
 
+    private fun vehicleItemClicked(item: Vehicle) {
+        onVehicleClicked?.onClick(item)
+        val behavior = BottomSheetBehavior.from(bottomSheetLayout)
+        if (behavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+            behavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        onVehicleClicked = context as OnVehicleClicked
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         vehicleStateDisposable?.dispose()
+    }
+
+    interface OnVehicleClicked {
+        fun onClick(objects: Vehicle)
     }
 }

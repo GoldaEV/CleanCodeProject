@@ -17,9 +17,8 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
-class VehicleMapActivity : BaseMvvmActivity<VehicleListViewModel>(),
-    OnMapReadyCallback {
-
+class VehicleMapActivity : BaseMvvmActivity<VehicleListViewModel>(), OnMapReadyCallback,
+    VehicleListFragment.OnVehicleClicked {
     private var map: GoogleMap? = null
 
     override fun provideLayoutId(): Int {
@@ -59,12 +58,16 @@ class VehicleMapActivity : BaseMvvmActivity<VehicleListViewModel>(),
     private fun moveToVehicle(vehicle: Vehicle) {
         val sydney = LatLng(vehicle.lat, vehicle.lon)
         map?.addMarker(MarkerOptions().position(sydney).title(vehicle.heading.toString()))
-        map?.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        map?.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 12f))
     }
 
     private fun initList() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.container, VehicleListFragment.getInstance())
         transaction.commit()
+    }
+
+    override fun onClick(objects: Vehicle) {
+        moveToVehicle(objects)
     }
 }
