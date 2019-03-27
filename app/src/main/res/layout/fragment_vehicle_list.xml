@@ -12,6 +12,10 @@
             android:background="@color/colorAccent"
             app:layout_behavior="@string/bottom_sheet_behavior">
 
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycleViewVehicle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
     </FrameLayout>
 
