@@ -71,10 +71,7 @@ class VehicleListFragment : BaseMvvmFragment<VehicleListViewModel>() {
             }
             is VehicleState.Done -> {
                 val list = state.vehicleList
-                Toast.makeText(
-                    context, state.vehicleList.size.toString(),
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(context, state.vehicleList.size.toString(), Toast.LENGTH_SHORT).show()
                 // закидываем в adapter
             }
             is VehicleState.Error -> {
