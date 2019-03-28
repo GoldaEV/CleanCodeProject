@@ -21,7 +21,6 @@ class VehicleListFragment : BaseMvvmFragment<VehicleListViewModel>() {
     companion object {
         fun getInstance() = VehicleListFragment()
     }
-    private lateinit var onVehicleClicked : OnVehicleClicked
 
     private var vehicleStateDisposable: Disposable? = null
 
@@ -95,24 +94,11 @@ class VehicleListFragment : BaseMvvmFragment<VehicleListViewModel>() {
     }
 
     private fun vehicleItemClicked(item: Vehicle) {
-        onVehicleClicked?.onClick(item)
-        val behavior = BottomSheetBehavior.from(bottomSheetLayout)
-        if (behavior.state == BottomSheetBehavior.STATE_EXPANDED) {
-            behavior.state = BottomSheetBehavior.STATE_COLLAPSED
-        }
-    }
-
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        onVehicleClicked = context as OnVehicleClicked
+        viewModel.vechicleClick(item)
     }
 
     override fun onDestroy() {
         super.onDestroy()
         vehicleStateDisposable?.dispose()
-    }
-
-    interface OnVehicleClicked {
-        fun onClick(objects: Vehicle)
     }
 }

@@ -17,8 +17,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
-class VehicleMapActivity : BaseMvvmActivity<VehicleListViewModel>(), OnMapReadyCallback,
-    VehicleListFragment.OnVehicleClicked {
+class VehicleMapActivity : BaseMvvmActivity<VehicleListViewModel>(), OnMapReadyCallback{
     private var map: GoogleMap? = null
 
     override fun provideLayoutId(): Int {
@@ -65,9 +64,5 @@ class VehicleMapActivity : BaseMvvmActivity<VehicleListViewModel>(), OnMapReadyC
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.container, VehicleListFragment.getInstance())
         transaction.commit()
-    }
-
-    override fun onClick(objects: Vehicle) {
-        moveToVehicle(objects)
     }
 }
