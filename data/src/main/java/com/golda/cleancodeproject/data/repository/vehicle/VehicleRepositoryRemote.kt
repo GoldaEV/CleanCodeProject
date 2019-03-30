@@ -3,7 +3,9 @@ package com.golda.cleancodeproject.data.repository.vehicle
 import com.golda.cleancodeproject.data.BuildConfig
 import com.golda.cleancodeproject.data.entity.vehicle.VehiclePoiResponse
 import com.golda.cleancodeproject.data.entity.vehicle.transform
+import com.golda.cleancodeproject.domain.entity.AppExaption
 import com.golda.cleancodeproject.domain.entity.vehicle.CoordinateParam
+import com.golda.cleancodeproject.domain.entity.vehicle.ExaptionType
 import com.golda.cleancodeproject.domain.entity.vehicle.Vehicle
 import com.golda.cleancodeproject.domain.repository.vehicle.VehicleRepository
 import com.google.gson.Gson
@@ -12,7 +14,9 @@ import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
+import java.io.IOException
 import java.lang.Exception
+import java.net.SocketTimeoutException
 
 class VehicleRepositoryRemote(private val url: String) : VehicleRepository {
 
@@ -28,11 +32,24 @@ class VehicleRepositoryRemote(private val url: String) : VehicleRepository {
                 emitter.onError(e)
             }
         }
-        .map {vehiclePoi ->
-            vehiclePoi.poiList.map {
-                    vehicleResponse ->  vehicleResponse.transform()
+            .map { vehiclePoi ->
+                vehiclePoi.poiList.map { vehicleResponse ->
+                    vehicleResponse.transform()
+                }
             }
-        }
+
+            .onErrorResumeNext {
+                when (it) {
+                    is SocketTimeoutException -> {
+                        Single
+                            .error(AppExaption(ExaptionType.NO_INTERNET))
+                    }
+                    else -> {
+                        Single
+                            .error(AppExaption(ExaptionType.UNKNOWN))
+                    }
+                }
+            }
     }
 
     @Throws(Exception::class)
