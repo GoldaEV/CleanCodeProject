@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
@@ -37,4 +38,9 @@ dependencies {
 
     //Modules
     api project(path: ":domain")
+
+    //Room
+    implementation rootProject.room_runtime
+    kapt rootProject.room_compiler
+    implementation rootProject.room_rxjava2
 }
