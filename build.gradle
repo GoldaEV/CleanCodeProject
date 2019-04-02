@@ -47,7 +47,7 @@ ext{
     rxjava2Android = "io.reactivex.rxjava2:rxandroid:2.1.1"
 
     //Network
-    gson = "com.google.code.gson:gson:2.8.5"
+//    gson = "com.google.code.gson:gson:2.8.5"
     def okhttpVersion = "3.14.0"
     okhttp3 = "com.squareup.okhttp3:okhttp:$okhttpVersion"
     okhttp3Logging = "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
@@ -63,4 +63,11 @@ ext{
     def lifecycle_version = "1.1.1"
     lifecycle =  "android.arch.lifecycle:extensions:$lifecycle_version"
     lifecycle_anot_proc = "android.arch.lifecycle:compiler:$lifecycle_version"
+
+    //Retrifit
+    def retrofit_version = "2.5.0"
+    retrofit = "com.squareup.retrofit2:retrofit:$retrofit_version"
+    retrofitGsonConverter = "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    retrofitRXJava = "com.squareup.retrofit2:adapter-rxjava:$retrofit_version"
+
 }

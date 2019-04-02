@@ -26,7 +26,7 @@ android {
 dependencies {
 
     //Network
-    implementation rootProject.gson
+//    implementation rootProject.gson
     implementation rootProject.okhttp3
     implementation rootProject.okhttp3Logging
 
@@ -34,6 +34,12 @@ dependencies {
     testImplementation rootProject.junit
     testImplementation rootProject.okhttp3Mockwebserver
     androidTestImplementation rootProject.supportTestRunner
+
+
+    //Retrofit
+    implementation rootProject.retrofit
+    implementation rootProject.retrofitGsonConverter
+    implementation rootProject.retrofitRXJava
 
     //Modules
     api project(path: ":domain")
